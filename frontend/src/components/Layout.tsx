@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 
-const Layout: React.FC = ({ children }) => {
+interface LayoutProps {
+    children: ReactNode; // Define the type of children prop
+}
+
+const Layout: React.FC<LayoutProps> = ({ children }) => {
     return (
         <div className="layout">
             <header>
