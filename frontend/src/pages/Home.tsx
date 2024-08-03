@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import NftCard from '../components/NftCard';
+import NFTCard from '../components/NFTCard';
 import { NFT } from '../types';
 
 const Home: React.FC = () => {
@@ -29,7 +29,7 @@ const Home: React.FC = () => {
     return (
         <div className="nft-gallery">
             {nfts.map((nft) => (
-                <NftCard key={nft.id} nft={nft} />
+                <NFTCard key={nft.id} nft={nft} />
             ))}
         </div>
     );
