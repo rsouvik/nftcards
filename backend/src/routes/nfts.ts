@@ -15,7 +15,7 @@ router.get('/nfts', async (req, res) => {
             params: {
                 order_direction: 'desc',
                 offset: 0,
-                limit: 20,
+                limit: 1,
             },
             headers: {
                 'X-API-KEY': process.env.OPENSEA_API_KEY, // Optional API key
