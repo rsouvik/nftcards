@@ -36,7 +36,7 @@ router.get('/nfts', async (req, res) => {
             },
             params: {
                 chain: 'ethereum',
-                limit: 1,
+                limit: 5,
             },
         });
 
