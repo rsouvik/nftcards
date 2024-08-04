@@ -7,7 +7,7 @@ const router = express.Router();
 
 // Define the OpenSea API URL
 //const OPENSEA_API_URL = 'https://api.opensea.io/api/v1/assets'; //https://api.opensea.io/api/v2/collections
-const OPENSEA_API_URL = 'https://api.opensea.io/api/v2/collections?chain=ethereum';
+const OPENSEA_API_URL = 'https://api.opensea.io/api/v2/collections';
 
 // Endpoint to fetch NFTs
 router.get('/nfts', async (req, res) => {
@@ -16,24 +16,30 @@ router.get('/nfts', async (req, res) => {
 
     try {
         const response = await axios.get(OPENSEA_API_URL, {
-            params: {
-                order_direction: 'desc',
-                offset: 0,
-                limit: 1,
+            headers: {
+                accept: 'application/json',
+                'x-api-key': process.env.OPENSEA_API_KEY, // Use the same key as in the fetch example
             },
-            headers: {accept: 'application/json','X-API-KEY': process.env.OPENSEA_API_KEY, // Optional API key
+            params: {
+                chain: 'ethereum',
+                limit: 1,
             },
         });
 
-        // Transform and send data back to the client
-        const nfts = response.data.assets.map((asset: any) => ({
-            id: asset.id,
-            name: asset.name,
-            description: asset.description,
-            image_url: asset.image_url,
-        }));
+        console.log('API Response:', response.data); // Debug the full response
 
-        res.json(nfts);
+        // Check if the response contains the expected data
+        if (response.data && response.data.collections) {
+            const collections = response.data.collections.map((collection) => ({
+                id: collection.id,
+                name: collection.name,
+                description: collection.description,
+                image_url: collection.image_url,
+            }));
+            res.json(collections);
+        } else {
+            res.status(404).json({ message: 'No collections found' });
+        }
     } catch (error) {
         console.error('Error fetching NFTs:', error);
         res.status(500).json({ message: 'Error fetching NFTs' });
