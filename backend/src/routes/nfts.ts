@@ -17,6 +17,7 @@ interface ApiResponse {
 // Define a TypeScript interface for the collection data structure
 interface Collection {
     id: string;
+    collection: string;
     name: string;
     description: string;
     image_url: string;
@@ -44,7 +45,8 @@ router.get('/nfts', async (req, res) => {
         // Check if the response contains the expected data
         if (response.data && response.data.collections) {
             const collections = response.data.collections.map((collection: Collection) => ({
-                id: collection.id,
+                //id: collection.id,
+                id: collection.collection,
                 name: collection.name,
                 description: collection.description,
                 image_url: collection.image_url,

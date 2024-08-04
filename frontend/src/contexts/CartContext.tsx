@@ -15,7 +15,7 @@ const CartContext = createContext<CartContextProps>({
     isInCart: () => false,
 });
 
-const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+/*const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [cart, setCart] = useState<NFT[]>([]);
 
     const addToCart = (nft: NFT) => {
@@ -37,4 +37,31 @@ const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     );
 };
 
-export { CartContext, CartProvider };
+export { CartContext, CartProvider };*/
+
+export const CartProvider: React.FC = ({ children }) => {
+    const [cart, setCart] = useState<NFT[]>([]);
+
+    const addToCart = useCallback((nft: NFT) => {
+        setCart((prevCart) => [...prevCart, nft]);
+    }, []);
+
+    const removeFromCart = useCallback((id: string) => {
+        setCart((prevCart) => prevCart.filter((item) => item.id !== id));
+    }, []);
+
+    const isInCart = useCallback(
+        (id: string) => {
+            return cart.some((item) => item.id === id);
+        },
+        [cart]
+    );
+
+    return (
+        <CartContext.Provider value={{ cart, addToCart, removeFromCart, isInCart }}>
+            {children}
+        </CartContext.Provider>
+    );
+};
+
+export const useCart = () => useContext(CartContext);
