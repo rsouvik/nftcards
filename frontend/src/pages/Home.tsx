@@ -11,7 +11,7 @@ const Home: React.FC = () => {
     useEffect(() => {
         const fetchNFTs = async () => {
             try {
-                const response = await axios.get('/api/nfts');
+                const response = await axios.get<NFT[]>('/api/nfts');
                 setNfts(response.data);
             } catch (error) {
                 setError('Error fetching NFTs');
