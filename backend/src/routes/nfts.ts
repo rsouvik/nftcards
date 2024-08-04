@@ -11,7 +11,7 @@ const OPENSEA_API_URL = 'https://api.opensea.io/api/v2/collections?chain=ethereu
 
 // Endpoint to fetch NFTs
 router.get('/nfts', async (req, res) => {
-    try {
+    /*try {
         const response = await axios.get(OPENSEA_API_URL, {
             params: {
                 order_direction: 'desc',
@@ -35,7 +35,18 @@ router.get('/nfts', async (req, res) => {
     } catch (error) {
         console.error('Error fetching NFTs:', error);
         res.status(500).json({ message: 'Error fetching NFTs' });
-    }
+    }*/
+
+    const options = {
+        method: 'GET',
+        headers: {accept: 'application/json', 'x-api-key': 'REDACTED'}
+    };
+
+    fetch('https://api.opensea.io/api/v2/collections?chain=ethereum&limit=1', options)
+        .then(response => response.json())
+        .then(response => console.log(response))
+        .catch(err => console.error(err));
+
 });
 
 export default router;
