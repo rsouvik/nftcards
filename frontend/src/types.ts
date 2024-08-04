@@ -5,5 +5,5 @@ export interface NFT {
     name: string;
     description: string;
     image_url: string;
-    [key: string]: any; // To allow additional properties if necessary
+    //[key: string]: any; // To allow additional properties if necessary
 }
