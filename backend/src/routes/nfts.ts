@@ -25,7 +25,7 @@ interface Collection {
 // Endpoint to fetch NFTs
 router.get('/nfts', async (req, res) => {
 
-    console.log('OpenSea API Key:', process.env.OPENSEA_API_KEY);
+    //console.log('OpenSea API Key:', process.env.OPENSEA_API_KEY);
 
     try {
         const response = await axios.get<ApiResponse>(OPENSEA_API_URL, {
