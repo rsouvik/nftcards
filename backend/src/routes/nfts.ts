@@ -6,7 +6,8 @@ import axios from 'axios';
 const router = express.Router();
 
 // Define the OpenSea API URL
-const OPENSEA_API_URL = 'https://api.opensea.io/api/v1/assets';
+//const OPENSEA_API_URL = 'https://api.opensea.io/api/v1/assets'; //https://api.opensea.io/api/v2/collections
+const OPENSEA_API_URL = 'https://api.opensea.io/api/v2/collections';
 
 // Endpoint to fetch NFTs
 router.get('/nfts', async (req, res) => {
