@@ -9,6 +9,14 @@ const router = express.Router();
 //const OPENSEA_API_URL = 'https://api.opensea.io/api/v1/assets'; //https://api.opensea.io/api/v2/collections
 const OPENSEA_API_URL = 'https://api.opensea.io/api/v2/collections';
 
+// Define a TypeScript interface for the collection data structure
+interface Collection {
+    id: string;
+    name: string;
+    description: string;
+    image_url: string;
+}
+
 // Endpoint to fetch NFTs
 router.get('/nfts', async (req, res) => {
 
