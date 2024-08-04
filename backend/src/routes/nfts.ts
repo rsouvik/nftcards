@@ -9,6 +9,11 @@ const router = express.Router();
 //const OPENSEA_API_URL = 'https://api.opensea.io/api/v1/assets'; //https://api.opensea.io/api/v2/collections
 const OPENSEA_API_URL = 'https://api.opensea.io/api/v2/collections';
 
+// Define the structure of the expected response data
+interface ApiResponse {
+    collections: Array<Collection>;
+}
+
 // Define a TypeScript interface for the collection data structure
 interface Collection {
     id: string;
@@ -23,7 +28,7 @@ router.get('/nfts', async (req, res) => {
     console.log('OpenSea API Key:', process.env.OPENSEA_API_KEY);
 
     try {
-        const response = await axios.get(OPENSEA_API_URL, {
+        const response = await axios.get<ApiResponse>(OPENSEA_API_URL, {
             headers: {
                 accept: 'application/json',
                 'x-api-key': process.env.OPENSEA_API_KEY, // Use the same key as in the fetch example
@@ -38,7 +43,7 @@ router.get('/nfts', async (req, res) => {
 
         // Check if the response contains the expected data
         if (response.data && response.data.collections) {
-            const collections = response.data.collections.map((collection) => ({
+            const collections = response.data.collections.map((collection: Collection) => ({
                 id: collection.id,
                 name: collection.name,
                 description: collection.description,
