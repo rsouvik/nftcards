@@ -16,10 +16,12 @@ export const getCartItems = async (req: Request, res: Response) => {
     const sessionId = req.cookies.sessionId;
     try {
         const connection = await connectToDatabase();
-        const { rows: cartItems } = await connection.query('SELECT * FROM cart_items WHERE session_id = $1', [sessionId]);
+        //const { rows: cartItems } = await connection.query('SELECT * FROM cart_items WHERE session_id = $1', [sessionId]);
+        const result = await connection.query('SELECT * FROM cart_items WHERE session_id = $1', [sessionId]);
+        const cartItems = result.rows;
+        const numberOfRows = cartItems ? cartItems.length : 0;
+        console.log(`Number of rows retrieved: ${numberOfRows}`);
         res.json(cartItems);
-        const numberOfRows = cartItems.length;
-        console.error(`Number of nfts retrieved from backend: ${numberOfRows}`);
     } catch (error) {
         console.error('Error fetching cart items:', error);
         res.status(500).json({ message: 'Error fetching cart items' });
