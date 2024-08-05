@@ -1,4 +1,5 @@
 import React, { createContext, useState, ReactNode } from 'react';
+import axios from 'axios';
 import { NFT } from '../types';
 
 interface CartContextProps {
@@ -8,12 +9,65 @@ interface CartContextProps {
     isInCart: (id: string) => boolean;
 }
 
-const CartContext = createContext<CartContextProps>({
+export const CartContext = createContext<CartContextProps>({
     cart: [],
     addToCart: () => {},
     removeFromCart: () => {},
     isInCart: () => false,
 });
+
+const CartProvider: React.FC = ({ children }) => {
+    const [cart, setCart] = useState<NFT[]>([]);
+
+    // Fetch cart items from the server when the component mounts
+    useEffect(() => {
+        const fetchCart = async () => {
+            try {
+                const response = await axios.get('/api/cart');
+                setCart(response.data);
+            } catch (error) {
+                console.error('Error fetching cart items:', error);
+            }
+        };
+
+        fetchCart();
+    }, []);
+
+    const addToCart = useCallback(async (item: NFT) => {
+        try {
+            await axios.post('/api/cart', {
+                itemId: item.id,
+                itemName: item.name,
+                itemDescription: item.description,
+                itemImageUrl: item.image_url,
+            });
+            setCart((prevCart) => [...prevCart, item]);
+        } catch (error) {
+            console.error('Error adding to cart:', error);
+        }
+    }, []);
+
+    const removeFromCart = useCallback(async (id: string) => {
+        try {
+            await axios.delete(`/api/cart/${id}`);
+            setCart((prevCart) => prevCart.filter(item => item.id !== id));
+        } catch (error) {
+            console.error('Error removing from cart:', error);
+        }
+    }, []);
+
+    const isInCart = useCallback((id: string) => {
+        return cart.some((item) => item.id === id);
+    }, [cart]);
+
+    return (
+        <CartContext.Provider value={{ cart, addToCart, removeFromCart, isInCart }}>
+            {children}
+        </CartContext.Provider>
+    );
+};
+
+export default CartProvider;
 
 /*const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [cart, setCart] = useState<NFT[]>([]);
@@ -39,7 +93,7 @@ const CartContext = createContext<CartContextProps>({
 
 export { CartContext, CartProvider };*/
 
-const CartProvider: React.FC = ({ children }) => {
+/*const CartProvider: React.FC = ({ children }) => {
     const [cart, setCart] = useState<NFT[]>([]);
 
     const addToCart = useCallback((nft: NFT) => {
@@ -65,4 +119,4 @@ const CartProvider: React.FC = ({ children }) => {
 };
 
 //export const useCart = () => useContext(CartContext);
-export { CartContext, CartProvider }
+export { CartContext, CartProvider } */
