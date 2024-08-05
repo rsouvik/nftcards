@@ -15,6 +15,13 @@ import nftRoutes from './routes/nfts';
 const app = express();
 app.use(cookieParser());
 
+import { Request } from 'express';
+
+// Extend the Request interface to include sessionId
+export interface CustomRequest extends Request {
+  sessionId?: string;
+}
+
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, '..', '..', 'frontend', 'build')));
 
@@ -23,7 +30,7 @@ app.use(bodyParser.json());
 //app.use(cookieParser());
 
 // Middleware to handle session
-app.use((req, res, next) => {
+app.use((req: CustomRequest, res, next) => {
   let sessionId = req.cookies.sessionId;
 
   if (!sessionId) {
