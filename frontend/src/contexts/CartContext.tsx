@@ -65,3 +65,4 @@ export const CartProvider: React.FC = ({ children }) => {
 };
 
 export const useCart = () => useContext(CartContext);
+export { CartContext };
