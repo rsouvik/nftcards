@@ -17,7 +17,7 @@ export const getCartItems = async (req: Request, res: Response) => {
     try {
         const connection = await connectToDatabase();
         //const { rows: cartItems } = await connection.query('SELECT * FROM cart_items WHERE session_id = $1', [sessionId]);
-        const result = await connection.query('SELECT * FROM cart_items WHERE session_id = $1', [sessionId]);
+        const result = await connection.query(`SELECT * FROM cart_items WHERE session_id = $1`, [sessionId]);
         const cartItems = result.rows;
         const numberOfRows = cartItems ? cartItems.length : 0;
         console.log(`Number of rows retrieved: ${numberOfRows}`);
