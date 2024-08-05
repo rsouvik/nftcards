@@ -1,7 +1,8 @@
 import { Request, Response } from 'express';
 import { getRepository } from 'typeorm';
 import { CartItem } from '../models/cartItem';
-import { db } from '../database';
+//import { db } from '../database';
+import { createConnection } from 'typeorm';
 
 export const getCartItems = async (req: Request, res: Response) => {
     const cartItemRepository = getRepository(CartItem);
@@ -19,10 +20,10 @@ export const getCartItems = async (req: Request, res: Response) => {
 // Add item to cart
 export const addCartItem = async (req: Request, res: Response) => {
     const { itemId, itemName, itemDescription, itemImageUrl } = req.body;
-    const sessionId = req.sessionId;
+    const sessionId = req.cookies.sessionId;
 
     try {
-        await db.query(
+        await (await createConnection()).query(
             'INSERT INTO cart_items (session_id, item_id, item_name, item_description, item_image_url) VALUES ($1, $2, $3, $4, $5)',
             [sessionId, itemId, itemName, itemDescription, itemImageUrl]
         );
