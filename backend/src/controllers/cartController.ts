@@ -31,7 +31,7 @@ export const addCartItem = async (req: Request, res: Response) => {
         console.error('Error adding item to cart:', error);
         res.status(500).json({ message: 'Error adding item to cart' });
     }
-});
+};
 
 export const removeCartItem = async (req: Request, res: Response) => {
     const cartItemRepository = getRepository(CartItem);
