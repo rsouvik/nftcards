@@ -62,7 +62,8 @@ export const removeCartItem = async (req: Request, res: Response) => {
 
     try {
         const connection = await connectToDatabase();
-        await connection.query('DELETE FROM cart_items WHERE session_id = $1 AND item_id = $2', [sessionId, itemId]);
+        //await connection.query('DELETE FROM cart_items WHERE session_id = $1 AND item_id = $2', [sessionId, itemId]);
+        await connection.query('DELETE FROM cart_items WHERE session_id = $1 AND id = $2', [sessionId, itemId]);  //need to figure this out
         res.send('Item removed from cart');
     } catch (error) {
         console.error('Error removing item from cart:', error);
