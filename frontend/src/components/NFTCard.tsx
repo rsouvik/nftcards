@@ -33,7 +33,7 @@ const NFTCard: React.FC<NFTCardProps> = ({ nft }) => {
 
     const handleRemoveFromCart = async () => {
         try {
-            await axios.delete('/api/cart/${nft.id}');
+            await axios.delete(`/api/cart/${nft.id}`);
             removeFromCart(nft.id);  //update local state
         } catch (error) {
             console.error('Error delete from cart:', error);
