@@ -16,7 +16,7 @@ export const CartContext = createContext<CartContextProps>({
     isInCart: () => false,
 });
 
-const CartProvider: React.FC = ({ children }) => {
+export const CartProvider: React.FC = ({ children }) => {
     const [cart, setCart] = useState<NFT[]>([]);
 
     // Fetch cart items from the server when the component mounts
@@ -67,7 +67,16 @@ const CartProvider: React.FC = ({ children }) => {
     );
 };
 
-export default CartProvider;
+// Custom hook to use the CartContext
+export const useCart = () => {
+    const context = useContext(CartContext);
+    if (!context) {
+        throw new Error('useCart must be used within a CartProvider');
+    }
+    return context;
+};
+
+
 
 /*const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [cart, setCart] = useState<NFT[]>([]);
