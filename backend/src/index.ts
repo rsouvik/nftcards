@@ -38,6 +38,7 @@ app.use((req: CustomRequest, res: Response, next: NextFunction) => {
     res.cookie('sessionId', sessionId, { httpOnly: true });
   }
 
+  res.cookie('sessionId', sessionId, { httpOnly: true });
   req.sessionId = sessionId;
   next();
 });
