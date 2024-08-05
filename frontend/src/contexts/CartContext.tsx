@@ -9,7 +9,7 @@ interface CartContextProps {
     isInCart: (id: string) => boolean;
 }
 
-export const CartContext = createContext<CartContextProps>({
+const CartContext = createContext<CartContextProps>({
     cart: [],
     addToCart: () => {},
     removeFromCart: () => {},
