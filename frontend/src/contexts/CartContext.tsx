@@ -16,7 +16,7 @@ export const CartContext = createContext<CartContextProps>({
     isInCart: () => false,
 });
 
-export const CartProvider: React.FC = ({ children }) => {
+/*export const CartProvider: React.FC = ({ children }) => {
     const [cart, setCart] = useState<NFT[]>([]);
 
     // Fetch cart items from the server when the component mounts
@@ -77,8 +77,8 @@ export const useCart = () => {
 };
 
 
-
-/*const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+*/
+const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [cart, setCart] = useState<NFT[]>([]);
 
     const addToCart = (nft: NFT) => {
@@ -100,7 +100,7 @@ export const useCart = () => {
     );
 };
 
-export { CartContext, CartProvider };*/
+export { CartContext, CartProvider };
 
 /*const CartProvider: React.FC = ({ children }) => {
     const [cart, setCart] = useState<NFT[]>([]);
