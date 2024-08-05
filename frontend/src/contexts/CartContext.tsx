@@ -78,7 +78,8 @@ export const useCart = () => {
 
 
 */
-const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+
+const CartProvider = ({children}: {children: React.ReactNode}) => {
     const [cart, setCart] = useState<NFT[]>([]);
 
     const addToCart = (nft: NFT) => {
