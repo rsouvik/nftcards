@@ -28,7 +28,7 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 // Middleware to handle session
-app.use((req: Request, res: Response, next: NextFunction) => {
+app.use((req: CustomRequest, res: Response, next: NextFunction) => {
   let sessionId = req.cookies.sessionId;
 
   if (!sessionId) {
