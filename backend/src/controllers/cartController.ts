@@ -3,7 +3,6 @@ import { getRepository } from 'typeorm';
 import { CartItem } from '../models/cartItem';
 //import { db } from '../database';
 import { createConnection } from 'typeorm';
-import { Request, Response } from 'express';
 import {connectToDatabase} from '../database';
 
 export const getCartItems = async (req: Request, res: Response) => {
