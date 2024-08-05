@@ -39,7 +39,7 @@ const CartContext = createContext<CartContextProps>({
 
 export { CartContext, CartProvider };*/
 
-export const CartProvider: React.FC = ({ children }) => {
+const CartProvider: React.FC = ({ children }) => {
     const [cart, setCart] = useState<NFT[]>([]);
 
     const addToCart = useCallback((nft: NFT) => {
@@ -64,5 +64,5 @@ export const CartProvider: React.FC = ({ children }) => {
     );
 };
 
-export const useCart = () => useContext(CartContext);
-export { CartContext };
+//export const useCart = () => useContext(CartContext);
+export { CartContext, CartProvider }
