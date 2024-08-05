@@ -27,10 +27,10 @@ app.use(express.static(path.join(__dirname, '..', '..', 'frontend', 'build')));
 
 app.use(cors());
 app.use(bodyParser.json());
-//app.use(cookieParser());
+app.use(cookieParser());
 
 // Middleware to handle session
-app.use((req: CustomRequest, res, next) => {
+app.use((req: CustomRequest, res: Response, next: NextFunction) => {
   let sessionId = req.cookies.sessionId;
 
   if (!sessionId) {
