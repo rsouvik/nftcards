@@ -2,6 +2,8 @@ import dotenv from 'dotenv';
 dotenv.config();
 import 'reflect-metadata';
 import express from 'express';
+import cookieParser from 'cookie-parser';
+import { v4 as uuidv4 } from 'uuid';
 import cors from 'cors';
 import path from 'path';
 import bodyParser from 'body-parser';
@@ -17,6 +19,20 @@ app.use(express.static(path.join(__dirname, '..', '..', 'frontend', 'build')));
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use(cookieParser());
+
+// Middleware to handle session
+app.use((req, res, next) => {
+  let sessionId = req.cookies.sessionId;
+
+  if (!sessionId) {
+    sessionId = uuidv4();
+    res.cookie('sessionId', sessionId, { httpOnly: true });
+  }
+
+  req.sessionId = sessionId;
+  next();
+});
 
 app.use('/api/cart', cartRoutes);
 app.use('/api', nftRoutes);

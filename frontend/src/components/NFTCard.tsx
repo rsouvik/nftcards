@@ -2,6 +2,7 @@
 
 import React, { useContext } from 'react';
 import { NFT } from '../types';
+import axios from 'axios';
 import { CartContext } from '../contexts/CartContext';
 
 interface NFTCardProps {
@@ -11,8 +12,23 @@ interface NFTCardProps {
 const NFTCard: React.FC<NFTCardProps> = ({ nft }) => {
     const { addToCart, removeFromCart, isInCart } = useContext(CartContext);
 
-    const handleAddToCart = () => {
+    //update this to use db
+    /*const handleAddToCart = () => {
         addToCart(nft);
+    };*/
+
+    const handleAddToCart = async () => {
+        try {
+            await axios.post('/api/cart', {
+                itemId: nft.id,
+                itemName: nft.name,
+                itemDescription: nft.description,
+                itemImageUrl: nft.image_url,
+            });
+            addToCart(nft); // Update local cart state
+        } catch (error) {
+            console.error('Error adding to cart:', error);
+        }
     };
 
     const handleRemoveFromCart = () => {
