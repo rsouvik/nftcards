@@ -7,3 +7,11 @@ export interface NFT {
     image_url: string;
     //[key: string]: any; // To allow additional properties if necessary
 }
+
+export interface CartItem {
+    id: string;
+    name: string;
+    description: string;
+    image_url: string;
+    //[key: string]: any; // To allow additional properties if necessary
+}
