@@ -13,13 +13,14 @@ import cartRoutes from './routes/cart';
 import nftRoutes from './routes/nfts';
 
 const app = express();
+app.use(cookieParser());
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, '..', '..', 'frontend', 'build')));
 
 app.use(cors());
 app.use(bodyParser.json());
-app.use(cookieParser());
+//app.use(cookieParser());
 
 // Middleware to handle session
 app.use((req, res, next) => {
