@@ -3,6 +3,8 @@ import { getRepository } from 'typeorm';
 import { CartItem } from '../models/cartItem';
 //import { db } from '../database';
 import { createConnection } from 'typeorm';
+import { Request, Response } from 'express';
+import {connectToDatabase} from '../database';
 
 export const getCartItems = async (req: Request, res: Response) => {
     const cartItemRepository = getRepository(CartItem);
@@ -23,7 +25,8 @@ export const addCartItem = async (req: Request, res: Response) => {
     const sessionId = req.cookies.sessionId;
 
     try {
-        await (await createConnection()).query(
+        const connection = await connectToDatabase();
+        await connection.query(
             'INSERT INTO cart_items (session_id, item_id, item_name, item_description, item_image_url) VALUES ($1, $2, $3, $4, $5)',
             [sessionId, itemId, itemName, itemDescription, itemImageUrl]
         );
