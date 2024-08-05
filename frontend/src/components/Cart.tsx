@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { CartContext } from '../contexts/CartContext';
-import { CartItem } from "../types";
+import {CartItem, NFT} from "../types";
 import axios from 'axios';
 
 /*const Cart: React.FC = () => {
@@ -36,7 +36,7 @@ const Cart: React.FC = () => {
     useEffect(() => {
         const fetchCartItems = async () => {
             try {
-                const response = await axios.get('/api/cart');
+                const response = await axios.get<CartItem[]>('/api/cart');
                 setCartItems(response.data);
                 setLoading(false);
             } catch (error) {
