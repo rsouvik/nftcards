@@ -18,6 +18,8 @@ export const getCartItems = async (req: Request, res: Response) => {
         const connection = await connectToDatabase();
         const { rows: cartItems } = await connection.query('SELECT * FROM cart_items WHERE session_id = $1', [sessionId]);
         res.json(cartItems);
+        const numberOfRows = cartItems.length;
+        console.error('Number of nfts retrieved from backend:'${numberOfRows});
     } catch (error) {
         console.error('Error fetching cart items:', error);
         res.status(500).json({ message: 'Error fetching cart items' });
