@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 dotenv.config();
 import 'reflect-metadata';
-import express from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 import cookieParser from 'cookie-parser';
 import { v4 as uuidv4 } from 'uuid';
 import cors from 'cors';
@@ -14,8 +14,6 @@ import nftRoutes from './routes/nfts';
 
 const app = express();
 app.use(cookieParser());
-
-import { Request } from 'express';
 
 // Extend the Request interface to include sessionId
 export interface CustomRequest extends Request {
@@ -30,7 +28,7 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 // Middleware to handle session
-app.use((req: CustomRequest, res: Response, next: NextFunction) => {
+app.use((req: Request, res: Response, next: NextFunction) => {
   let sessionId = req.cookies.sessionId;
 
   if (!sessionId) {
