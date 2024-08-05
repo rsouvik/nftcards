@@ -16,7 +16,7 @@ export const getCartItems = async (req: Request, res: Response) => {
     const sessionId = req.cookies.sessionId;
     try {
         const connection = await connectToDatabase();
-        const { rows: cartItems } = connection.query('SELECT * FROM cart_items WHERE session_id = $1', [sessionId]);
+        const { rows: cartItems } = await connection.query('SELECT * FROM cart_items WHERE session_id = $1', [sessionId]);
         res.json(cartItems);
     } catch (error) {
         console.error('Error fetching cart items:', error);
