@@ -29,7 +29,9 @@ app.use(cookieParser());
 
 // Middleware to handle session
 app.use((req: CustomRequest, res: Response, next: NextFunction) => {
+  console.log(`Cookie is : ${req.cookies.toString()}`);
   let sessionId = req.cookies.sessionId;
+  console.log(`Session id is : ${req.cookies.sessionId}`);
 
   if (!sessionId) {
     sessionId = uuidv4();
