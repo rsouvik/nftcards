@@ -34,8 +34,7 @@ interface CartProps {
     ct: CartItem;
 }
 
-//const Cart: React.FC = () => {
-const NFTCard: React.FC<CartProps> = ({ ct }) => {
+const Cart: React.FC = () => {
 
     const { addToCart, removeFromCart, isInCart } = useContext(CartContext);
     const [cartItems, setCartItems] = useState<CartItem[]>([]);
@@ -72,14 +71,14 @@ const NFTCard: React.FC<CartProps> = ({ ct }) => {
         return <p>{error}</p>;
     }
 
-    const handleRemoveFromCart = async () => {
+    /*const handleRemoveFromCart = async () => {
         try {
             await axios.delete(`/api/cart/${ct.item_id}`);
             removeFromCart(ct.item_id);  //update local state
         } catch (error) {
             console.error('Error delete from cart:', error);
         }
-    };
+    };*/
 
     return (
         <div>
@@ -93,11 +92,6 @@ const NFTCard: React.FC<CartProps> = ({ ct }) => {
                             <img src={item.item_image_url} alt={item.item_name} width={50} height={50} />
                             <h3>{item.item_name}</h3>
                             <p>{item.item_description}</p>
-                            {isInCart(item.item_id) ? (
-                                <button onClick={handleRemoveFromCart}>Remove from Cart</button>
-                            ) : (
-                                <button onClick={handleRemoveFromCart}>Remove from Cart</button>
-                            )}
                         </li>
                     ))}
                 </ul>
