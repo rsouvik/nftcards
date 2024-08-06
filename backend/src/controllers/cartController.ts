@@ -16,12 +16,13 @@ export const getCartItems = async (req: Request, res: Response) => {
     const sessionId = req.cookies.sessionId;
     try {
         const connection = await connectToDatabase();
-        const { rows: cartItems } = await connection.query('SELECT item_name FROM cart_items WHERE session_id = $1', [sessionId]);
+        //const { rows: cartItems } = await connection.query('SELECT item_name FROM cart_items WHERE session_id = $1', [sessionId]);
         //const result = await connection.query(`SELECT * FROM cart_items WHERE session_id = $1`, [sessionId]);
         //const result = await connection.query(`SELECT * FROM cart_items WHERE session_id = "514179a4-d12c-49b3-a181-2606da396c83"`);
         //const result = await connection.query(`SELECT * FROM cart_items WHERE session_id LIKE '514179a4-d12c-49b3-a181-2606da396c83'`);
-        //const { rows: cartItems } = await connection.query('SELECT item_name FROM cart_items');
+        const { rows: cartItems } = await connection.query('SELECT item_name FROM cart_items');
         //console.log(cartItems[0]);
+        console.log('Query results:', cartItems);
 
         //const cartItems = result.rows;
         //const numberOfRows = cartItems ? cartItems.length : 0;
