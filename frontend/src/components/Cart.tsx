@@ -31,16 +31,10 @@ import axios from 'axios';
 export default Cart;*/
 
 const Cart: React.FC = () => {
-
     const [cartItems, setCartItems] = useState<CartItem[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
-    const { cart } = useContext(CartContext);
-    const { setCartCount } = useContext(CartContext);
-
-    if (cart.length === 0) {
-        return <div>Your cart is empty</div>;
-    }
+    const { cart, removeFromCart } = useContext(CartContext);
 
     useEffect(() => {
         const fetchCartItems = async () => {
@@ -66,15 +60,6 @@ const Cart: React.FC = () => {
         return <p>{error}</p>;
     }
 
-    /*const handleRemoveFromCart = async () => {
-        try {
-            await axios.delete(`/api/cart/${ct.item_id}`);
-            removeFromCart(ct.item_id);  //update local state
-        } catch (error) {
-            console.error('Error delete from cart:', error);
-        }
-    };*/
-
     return (
         <div>
             <h2>Your Cart</h2>
@@ -87,6 +72,7 @@ const Cart: React.FC = () => {
                             <img src={item.item_image_url} alt={item.item_name} width={50} height={50} />
                             <h3>{item.item_name}</h3>
                             <p>{item.item_description}</p>
+                            <button onClick={() => removeFromCart(item.id)}>Remove</button>
                         </li>
                     ))}
                 </ul>
