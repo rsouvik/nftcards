@@ -35,7 +35,7 @@ export const getCartItems = async (req: Request, res: Response) => {
 
         //const result = await connection.query('SELECT item_name FROM cart_items')
 
-        connection.query('SELECT item_name FROM cart_items').then(function (data) {
+        await connection.query('SELECT item_name FROM cart_items').then(function (data) {
             if(data.exists) {
                 res.json(data.rows);
                 console.log('Query results if exists:', data.rows[0].data);
@@ -53,7 +53,7 @@ export const getCartItems = async (req: Request, res: Response) => {
 
         });
 
-        waitASecond();
+        //waitASecond();
         //console.log(cartItems[0]);
         //console.log('Query results:', result.rows[0].data);
 
