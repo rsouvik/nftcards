@@ -30,13 +30,8 @@ import axios from 'axios';
 
 export default Cart;*/
 
-interface CartProps {
-    ct: CartItem;
-}
-
 const Cart: React.FC = () => {
 
-    const { addToCart, removeFromCart, isInCart } = useContext(CartContext);
     const [cartItems, setCartItems] = useState<CartItem[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
