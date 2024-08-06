@@ -36,17 +36,31 @@ export const getCartItems = async (req: Request, res: Response) => {
         //const result = await connection.query('SELECT item_name FROM cart_items')
 
         connection.query('SELECT item_name FROM cart_items').then(function (data) {
+            if(data.exists) {
+                res.json(data.rows);
+                console.log('Query results if exists:', data.rows[0].data);
+            } else {
+
+                //TODO: insert new user
+
+            }
             console.log('Query results:', data.rows[0].data);
-        })
+            //const cartItems = result.rows;
+            //const numberOfRows = cartItems ? cartItems.length : 0;
+            //console.log(`Number of rows retrieved: ${numberOfRows}`);
+            //res.json(cartItems);
+        }).catch(function(error) {
+
+        });
 
         waitASecond();
         //console.log(cartItems[0]);
-        console.log('Query results:', result.rows[0].data);
+        //console.log('Query results:', result.rows[0].data);
 
-        const cartItems = result.rows;
+        //const cartItems = result.rows;
         //const numberOfRows = cartItems ? cartItems.length : 0;
         //console.log(`Number of rows retrieved: ${numberOfRows}`);
-        res.json(cartItems);
+        //res.json(cartItems);
     } catch (error) {
         console.error('Error fetching cart items:', error);
         res.status(500).json({ message: 'Error fetching cart items' });
