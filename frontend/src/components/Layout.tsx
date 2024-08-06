@@ -10,7 +10,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         <div className="layout">
             <header>
                 <nav>
-                    <Link to="/">Home</Link>
+                    <Link to="/" style={{ marginRight: '20px' }}>Home</Link>
                     <Link to="/cart">Cart</Link>
                 </nav>
             </header>
