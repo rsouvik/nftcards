@@ -19,7 +19,7 @@ export const getCartItems = async (req: Request, res: Response) => {
         //const { rows: cartItems } = await connection.query('SELECT * FROM cart_items WHERE session_id = $1', [sessionId]);
         //const result = await connection.query(`SELECT * FROM cart_items WHERE session_id = $1`, [sessionId]);
         //const result = await connection.query(`SELECT * FROM cart_items WHERE session_id = "514179a4-d12c-49b3-a181-2606da396c83"`);
-        const result = await connection.query(`SELECT * FROM cart_items WHERE session_id = $1`, ['514179a4-d12c-49b3-a181-2606da396c83']);
+        const result = await connection.query(`SELECT * FROM cart_items WHERE session_id LIKE '514179a4-d12c-49b3-a181-2606da396c83'`);
 
         const cartItems = result.rows;
         const numberOfRows = cartItems ? cartItems.length : 0;
