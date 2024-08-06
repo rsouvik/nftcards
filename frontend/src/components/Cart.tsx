@@ -66,9 +66,9 @@ const Cart: React.FC = () => {
                 <ul>
                     {cartItems.map((item) => (
                         <li key={item.id}>
-                            <img src={item.image_url} alt={item.name} width={50} height={50} />
-                            <h3>{item.name}</h3>
-                            <p>{item.description}</p>
+                            <img src={item.item_image_url} alt={item.item_name} width={50} height={50} />
+                            <h3>{item.item_name}</h3>
+                            <p>{item.item_description}</p>
                         </li>
                     ))}
                 </ul>
