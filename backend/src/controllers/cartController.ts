@@ -33,15 +33,13 @@ export const getCartItems = async (req: Request, res: Response) => {
         //const result = await connection.query(`SELECT * FROM cart_items WHERE session_id LIKE '514179a4-d12c-49b3-a181-2606da396c83'`);
         //const { rows: cartItems } = await connection.query('SELECT item_name FROM cart_items');
 
-        //const result = await connection.query('SELECT item_name FROM cart_items')
+        const result = await connection.query('SELECT item_name FROM cart_items')
 
-        await connection.query('SELECT item_name FROM cart_items').then(function (data) {
+       /* await connection.query('SELECT item_name FROM cart_items').then(function (data) {
             if(data.exists) {
                 res.json(data.rows);
                 console.log('Query results if exists:', data.rows[0].data);
             } else {
-
-                //TODO: insert new user
 
             }
             console.log('Query results:', data.rows[0].data);
@@ -51,7 +49,7 @@ export const getCartItems = async (req: Request, res: Response) => {
             //res.json(cartItems);
         }).catch(function(error) {
 
-        });
+        });*/
 
         //waitASecond();
         //console.log(cartItems[0]);
@@ -60,7 +58,7 @@ export const getCartItems = async (req: Request, res: Response) => {
         //const cartItems = result.rows;
         //const numberOfRows = cartItems ? cartItems.length : 0;
         //console.log(`Number of rows retrieved: ${numberOfRows}`);
-        //res.json(cartItems);
+        res.json(result.rows).send("sending data");
     } catch (error) {
         console.error('Error fetching cart items:', error);
         res.status(500).json({ message: 'Error fetching cart items' });
