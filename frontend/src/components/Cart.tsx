@@ -36,6 +36,10 @@ const Cart: React.FC = () => {
     const [error, setError] = useState<string | null>(null);
     const { cart, removeFromCart } = useContext(CartContext);
 
+    if (cart.length === 0) {
+        return <div>Your cart is empty</div>;
+    }
+
     useEffect(() => {
         const fetchCartItems = async () => {
             try {
