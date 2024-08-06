@@ -51,6 +51,7 @@ export const addCartItem = async (req: Request, res: Response) => {
             'INSERT INTO cart_items (session_id, item_id, item_name, item_description, item_image_url) VALUES ($1, $2, $3, $4, $5)',
             [sessionId, itemId, itemName, itemDescription, itemImageUrl]
         );
+        console.error('Item added inside addCartItem');
         res.status(201).send('Item added to cart');
     } catch (error) {
         console.error('Error adding item to cart:', error);
