@@ -32,7 +32,12 @@ export const getCartItems = async (req: Request, res: Response) => {
         //const result = await connection.query(`SELECT * FROM cart_items WHERE session_id = "514179a4-d12c-49b3-a181-2606da396c83"`);
         //const result = await connection.query(`SELECT * FROM cart_items WHERE session_id LIKE '514179a4-d12c-49b3-a181-2606da396c83'`);
         //const { rows: cartItems } = await connection.query('SELECT item_name FROM cart_items');
-        const result = await connection.query('SELECT item_name FROM cart_items');
+
+        //const result = await connection.query('SELECT item_name FROM cart_items')
+
+        connection.query('SELECT item_name FROM cart_items').then(function (data) {
+            console.log('Query results:', data.rows[0].data);
+        })
 
         waitASecond();
         //console.log(cartItems[0]);
