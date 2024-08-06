@@ -58,7 +58,7 @@ export const getCartItems = async (req: Request, res: Response) => {
         //const cartItems = result.rows;
         //const numberOfRows = cartItems ? cartItems.length : 0;
         //console.log(`Number of rows retrieved: ${numberOfRows}`);
-        res.json(result.rows).send("sending data");
+        res.json(result.rows).send();
     } catch (error) {
         console.error('Error fetching cart items:', error);
         res.status(500).json({ message: 'Error fetching cart items' });
