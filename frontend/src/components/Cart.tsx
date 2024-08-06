@@ -35,6 +35,7 @@ const Cart: React.FC = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const { cart, removeFromCart } = useContext(CartContext);
+    const { setCartCount } = useContext(CartContext);
 
     if (cart.length === 0) {
         return <div>Your cart is empty</div>;

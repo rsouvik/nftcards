@@ -7,6 +7,7 @@ import {connectToDatabase} from '../database';
 import {setTimeout} from "timers";
 
 export const getCartItems = async (req: Request, res: Response) => {
+    const connection = await connectToDatabase();
     const cartItemRepository = getRepository(CartItem);
     const cartItems = await cartItemRepository.find();
     res.json(cartItems);
