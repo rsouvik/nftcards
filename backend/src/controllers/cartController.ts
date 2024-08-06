@@ -6,11 +6,11 @@ import { createConnection } from 'typeorm';
 import {connectToDatabase} from '../database';
 import {setTimeout} from "timers";
 
-/*export const getCartItems = async (req: Request, res: Response) => {
+export const getCartItems = async (req: Request, res: Response) => {
     const cartItemRepository = getRepository(CartItem);
     const cartItems = await cartItemRepository.find();
     res.json(cartItems);
-};*/
+};
 
 export const sleep = async (waitTime: number) =>
     new Promise(resolve =>
@@ -23,6 +23,7 @@ const waitASecond = async () => {
 }
 
 // Get cart items
+/*
 export const getCartItems = async (req: Request, res: Response) => {
     const sessionId = req.cookies.sessionId;
     try {
@@ -49,7 +50,7 @@ export const getCartItems = async (req: Request, res: Response) => {
             //res.json(cartItems);
         }).catch(function(error) {
 
-        });*/
+        });
 
         //waitASecond();
         //console.log(cartItems[0]);
@@ -63,7 +64,7 @@ export const getCartItems = async (req: Request, res: Response) => {
         console.error('Error fetching cart items:', error);
         res.status(500).json({ message: 'Error fetching cart items' });
     }
-};
+}; */
 
 /*export const addCartItem = async (req: Request, res: Response) => {
     const cartItemRepository = getRepository(CartItem);
