@@ -32,6 +32,7 @@ const Cart: React.FC = () => {
     const [cartItems, setCartItems] = useState<CartItem[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const { cart, removeFromCart } = useContext(CartContext);
 
     useEffect(() => {
         const fetchCartItems = async () => {
@@ -69,6 +70,7 @@ const Cart: React.FC = () => {
                             <img src={item.item_image_url} alt={item.item_name} width={50} height={50} />
                             <h3>{item.item_name}</h3>
                             <p>{item.item_description}</p>
+                            <button onclick={() => removeFromCart(item.id)}>Remove</button>
                         </li>
                     ))}
                 </ul>
