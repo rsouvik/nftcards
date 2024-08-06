@@ -3,6 +3,12 @@ nft card browser
 
 This is a REACT/node MVC App which is not dockerized as I didnt have enough time(it does work for some features). The DB is postgres. Make appropriate credential changes in backend/src/ormconfig.ts
 
+Loom video 1: 
+https://www.loom.com/share/1b35edfb63324d9f98c7a36492b698ce?sid=0ceac55e-3ed2-462c-be62-0e80254c49f7
+
+Loom video 2: 
+https://www.loom.com/share/c69c6d13dad34634b19448877b4770c8?sid=e7ea9e31-1587-41b3-b631-4fce5108cd3a
+
 Steps:
 1. Do a git clone of the repo
 2. There are 2 folders: frontend and backend
