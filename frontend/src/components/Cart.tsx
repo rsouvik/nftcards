@@ -26,6 +26,8 @@ import axios from 'axios';
     );
 };
 
+                            <button onClick={() => removeFromCart(item.item_id)}>Remove</button>
+
 export default Cart;*/
 
 const Cart: React.FC = () => {
@@ -70,7 +72,6 @@ const Cart: React.FC = () => {
                             <img src={item.item_image_url} alt={item.item_name} width={50} height={50} />
                             <h3>{item.item_name}</h3>
                             <p>{item.item_description}</p>
-                            <button onClick={() => removeFromCart(item.item_id)}>Remove</button>
                         </li>
                     ))}
                 </ul>
