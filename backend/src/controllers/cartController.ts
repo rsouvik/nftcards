@@ -4,12 +4,23 @@ import { CartItem } from '../models/cartItem';
 //import { db } from '../database';
 import { createConnection } from 'typeorm';
 import {connectToDatabase} from '../database';
+import {setTimeout} from "timers";
 
 /*export const getCartItems = async (req: Request, res: Response) => {
     const cartItemRepository = getRepository(CartItem);
     const cartItems = await cartItemRepository.find();
     res.json(cartItems);
 };*/
+
+export const sleep = async (waitTime: number) =>
+    new Promise(resolve =>
+        setTimeout(resolve, waitTime));
+
+const waitASecond = async () => {
+    console.log("Hold your horses!");
+    await sleep(1000);
+    console.log("Release your horses!");
+}
 
 // Get cart items
 export const getCartItems = async (req: Request, res: Response) => {
@@ -23,6 +34,7 @@ export const getCartItems = async (req: Request, res: Response) => {
         //const { rows: cartItems } = await connection.query('SELECT item_name FROM cart_items');
         const result = await connection.query('SELECT item_name FROM cart_items');
 
+        waitASecond();
         //console.log(cartItems[0]);
         console.log('Query results:', result.rows[0].data);
 
